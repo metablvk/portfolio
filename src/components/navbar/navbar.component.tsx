@@ -51,7 +51,7 @@ const Navbar = () => {
         } border-t-2 border-custom-purple mt-3 z-20 mobile-menu container flex flex-col text-2xl space-y-4 right-0 left-0 w-full items-end justify-end pb-40 absolute h-screen lg:hidden`}
       >
         {links.map((link, i) => (
-          <Link to={link[0]} key={i}>
+          <Link to={link[0]} key={i} onClick={handleClick}>
             {link[1]}{' '}
             <span
               className={link[0] == pathname ? 'text-custom-purple' : ''}

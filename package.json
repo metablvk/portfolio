@@ -16,6 +16,9 @@
     "posttest": "npm run lint"
   },
   "dependencies": {
+    "@portabletext/react": "^3.0.4",
+    "@portabletext/types": "^2.0.5",
+    "@sanity/client": "^6.4.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.14.2"
