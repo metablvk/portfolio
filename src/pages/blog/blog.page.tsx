@@ -17,15 +17,29 @@ const Blog = () => {
   return (
     <div className="relative mt-12">
       <Title title="Blog" subTitle="Some blog posts by me" />
-      <div className="posts mt-8">
-        {posts &&
-          posts.map(post => (
-            <div>
-              <Link to={`${post.slug}`}>
-                <h2>{post.name}</h2>
-              </Link>
-            </div>
-          ))}
+      <div className="grid grid-cols-1 md:grid-cols-2">
+        <div className="posts mt-8">
+          {posts &&
+            posts.map(post => (
+              <div>
+                <Link to={`${post.slug}`}>
+                  <div className="flex justify-between items-center mb-4">
+                    <h3 className="text-custom-purple text-xl tracking-wide">
+                      {post.name}{' '}
+                    </h3>
+                    <p className=" font-bold">
+                      {' '}
+                      {`${String(post._createdAt).slice(
+                        0,
+                        String(post._createdAt).indexOf('T')
+                      )}`}
+                    </p>
+                  </div>
+                </Link>
+                <hr className="border-custom-grey border-1" />
+              </div>
+            ))}
+        </div>
       </div>
     </div>
   );

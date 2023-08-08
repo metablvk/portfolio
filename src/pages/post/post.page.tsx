@@ -20,10 +20,15 @@ const Post = () => {
     fetchPost();
   }, [slug]);
 
+  useEffect(() => {
+    // Loading in tailwind css styles to portable text
+    const h2C = ['text-2xl', 'font-bold'];
+    document.querySelector('h2')?.classList.add(...h2C);
+  }, [post]);
   return (
     <div className="relative mt-12">
       <h1 className="mb-4 text-3xl font-bold">{post && post.name}</h1>
-      <div className="max-w-prose">
+      <div className="max-w-prose space-y-4">
         {post && <PortableText value={post.content} />}
       </div>
     </div>
