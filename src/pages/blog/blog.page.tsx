@@ -1,10 +1,11 @@
 import {useEffect, useState, MouseEvent} from 'react';
 import Title from '../../components/title/title.component';
 import {getCategories, getPosts} from '../../sanity/sanity.utils';
-import {Link} from 'react-router-dom';
 import {Post} from '../../types/post.type';
 import {Category} from '../../types/category.type';
 import CategoryFilter from '../../components/category-filter/category-filter.component';
+import Posts from '../../components/posts/posts.component';
+
 const Blog = () => {
   const [posts, setPosts] = useState<Post[] | []>([]);
   const [fPosts, setFPosts] = useState<Post[] | []>([]);
@@ -52,26 +53,7 @@ const Blog = () => {
       <Title title="Blog" subTitle="Some blog posts by me" />
       <div className="grid grid-cols-1 md:grid-cols-5 mt-8 gap-4">
         <div className="posts md:col-span-2">
-          {fPosts &&
-            fPosts.map(post => (
-              <div>
-                <Link to={`${post.slug}`} key={post._id}>
-                  <div className="flex justify-between items-center mb-4">
-                    <h3 className="text-custom-purple text-xl tracking-wide">
-                      {post.name}{' '}
-                    </h3>
-                    <p className=" font-bold">
-                      {' '}
-                      {`${String(post._createdAt).slice(
-                        0,
-                        String(post._createdAt).indexOf('T')
-                      )}`}
-                    </p>
-                  </div>
-                </Link>
-                <hr className="border-custom-grey border-1" />
-              </div>
-            ))}
+          {fPosts && <Posts posts={fPosts} />}
         </div>
         {/* Tablet/Desktop categories component */}
         <CategoryFilter
