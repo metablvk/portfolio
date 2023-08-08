@@ -4,7 +4,7 @@ import {getCategories, getPosts} from '../../sanity/sanity.utils';
 import {Link} from 'react-router-dom';
 import {Post} from '../../types/post.type';
 import {Category} from '../../types/category.type';
-
+import CategoryFilter from '../../components/category-filter/category-filter.component';
 const Blog = () => {
   const [posts, setPosts] = useState<Post[] | []>([]);
   const [fPosts, setFPosts] = useState<Post[] | []>([]);
@@ -73,35 +73,12 @@ const Blog = () => {
               </div>
             ))}
         </div>
-        <div className="border border-custom-grey categories hidden md:block md:col-span-2 md:col-start-4 p-4">
-          <h2 className="mb-4 pl-4 border-b border-custom-grey pb-4">
-            Categories
-          </h2>
-          {/* <hr className="border-custom-grey mb-4" /> */}
-          <div className="flex flex-col items-start space-y-4 pl-4">
-            <button
-              className={`cursor-pointer ${
-                fCategory === 'all' ? 'text-custom-purple' : ''
-              }`}
-              onClick={handleCategory}
-              id="all"
-            >
-              All
-            </button>
-            {categories.map(category => (
-              <button
-                className={`cursor-pointer ${
-                  category.name === fCategory ? 'text-custom-purple' : ''
-                }`}
-                onClick={handleCategory}
-                id={category.name}
-                key={category._id}
-              >
-                {category.name}
-              </button>
-            ))}
-          </div>
-        </div>
+        {/* Tablet/Desktop categories component */}
+        <CategoryFilter
+          fCategory={fCategory}
+          handleCategory={handleCategory}
+          categories={categories}
+        />
       </div>
     </div>
   );
