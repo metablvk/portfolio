@@ -1,7 +1,13 @@
+import {Outlet} from 'react-router-dom';
+import Navbar from './components/navbar/navbar.component';
+
 function App() {
   return (
     <>
-      <h1>Hello from portfolio</h1>
+      <Navbar />
+      <div className="container mt-8">
+        <Outlet />
+      </div>
     </>
   );
 }
