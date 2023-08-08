@@ -17,7 +17,16 @@ export async function getPosts(): Promise<Post[]> {
     "slug": slug.current,
     "image": image.asset->url,
     alt,
-    content
+    content,
+    categories[]->{ name}
+  }`);
+}
+
+export async function getCategories() {
+  return client.fetch(`*[_type == "category"]{
+    _id,
+    _createdAt,
+    name,
   }`);
 }
 
