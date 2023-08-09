@@ -48,16 +48,18 @@ const Navbar = () => {
       <div
         className={`${
           menuState ? '' : 'hidden'
-        } border-t-2 border-custom-purple mt-3 z-20 mobile-menu container flex flex-col text-2xl space-y-4 right-0 left-0 w-full items-end justify-end pb-40 absolute h-screen lg:hidden`}
+        } border-t-2 border-custom-purple mt-3 z-20 mobile-menu  text-2xl  right-0 left-0 w-full   absolute  lg:hidden`}
       >
-        {links.map((link, i) => (
-          <Link to={link[0]} key={i} onClick={handleClick}>
-            {link[1]}{' '}
-            <span
-              className={link[0] == pathname ? 'text-custom-purple' : ''}
-            ></span>
-          </Link>
-        ))}
+        <div className="container flex flex-col items-end justify-end h-screen pb-40 space-y-4">
+          {links.map((link, i) => (
+            <Link to={link[0]} key={i} onClick={handleClick}>
+              {link[1]}{' '}
+              <span
+                className={link[0] == pathname ? 'text-custom-purple' : ''}
+              ></span>
+            </Link>
+          ))}
+        </div>
       </div>
     </div>
   );
