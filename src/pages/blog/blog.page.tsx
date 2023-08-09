@@ -51,6 +51,12 @@ const Blog = () => {
   return (
     <div className="relative mt-12">
       <Title title="Blog" subTitle="Some blog posts by me" />
+      <CategoryFilter
+        fCategory={fCategory}
+        handleCategory={handleCategory}
+        categories={categories}
+        size="mobile"
+      />
       <div className="grid grid-cols-1 md:grid-cols-5 mt-8 gap-4">
         <div className="posts md:col-span-2">
           {fPosts && <Posts posts={fPosts} />}
@@ -60,6 +66,7 @@ const Blog = () => {
           fCategory={fCategory}
           handleCategory={handleCategory}
           categories={categories}
+          size="desktop"
         />
       </div>
     </div>
