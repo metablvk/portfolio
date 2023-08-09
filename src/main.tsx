@@ -13,6 +13,7 @@ import Home from './pages/home/home.page';
 import About from './pages/about/about.page';
 import Blog from './pages/blog/blog.page';
 import Post from './pages/post/post.page';
+import Projects from './pages/projects/projects.page';
 
 import './assets/css/index.css';
 
@@ -23,6 +24,7 @@ const router = createBrowserRouter(
       <Route path="/about" element={<About />} />
       <Route path="/blog" element={<Blog />} />
       <Route path="/blog/:slug" element={<Post />} />
+      <Route path="/projects" element={<Projects />} />
     </Route>
   )
 );
