@@ -14,6 +14,7 @@ import About from './pages/about/about.page';
 import Blog from './pages/blog/blog.page';
 import Post from './pages/post/post.page';
 import Projects from './pages/projects/projects.page';
+import Contact from './pages/contact/contact.page';
 
 import './assets/css/index.css';
 
@@ -25,6 +26,7 @@ const router = createBrowserRouter(
       <Route path="/blog" element={<Blog />} />
       <Route path="/blog/:slug" element={<Post />} />
       <Route path="/projects" element={<Projects />} />
+      <Route path="/contact" element={<Contact />} />
     </Route>
   )
 );
