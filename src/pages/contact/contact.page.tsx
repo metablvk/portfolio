@@ -26,7 +26,11 @@ const Contact = () => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    if (!messageSent) {
+    if (
+      !messageSent &&
+      formFields.subject.length > 0 &&
+      formFields.message.length > 0
+    ) {
       const {subject, message} = formFields;
       setLoading(true);
       try {
@@ -60,7 +64,7 @@ const Contact = () => {
         </div>
         <textarea
           id=""
-          className="p-2 bg-transparent text-custom-purple focus:outline-none border border-custom-grey"
+          className="p-2 bg-transparent text-custom-purple focus:outline-none border border-custom-grey h-40"
           onChange={handleChange}
           value={formFields.message}
           placeholder="enter your message..."
@@ -68,18 +72,18 @@ const Contact = () => {
         ></textarea>
         <button
           type="submit"
-          className="border border-custom-purple py-3 "
+          className="border border-custom-purple py-3 flex justify-center space-x-2 "
           disabled={messageSent}
         >
-          {loading && !messageSent
-            ? 'Sending'
-            : !loading && messageSent
-            ? 'Your message has been sent.'
-            : 'send'}
-        </button>
-        <div className="absolute right-60 bottom-2">
+          <span>
+            {loading && !messageSent
+              ? 'Sending'
+              : !loading && messageSent
+              ? 'Your message has been sent.'
+              : 'send'}
+          </span>
           {loading && <Loader />}
-        </div>
+        </button>
       </form>
     </div>
   );
