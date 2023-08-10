@@ -1,5 +1,7 @@
-import {ChangeEvent, useEffect, useState} from 'react';
+import {ChangeEvent, FormEvent, useEffect, useState} from 'react';
 import Title from '../../components/title/title.component';
+import {createMessage} from '../../utils/firebase.utils';
+import Loader from '../../components/loader/loader.component';
 
 const defaultFormFields = {
   subject: '',
@@ -8,7 +10,8 @@ const defaultFormFields = {
 
 const Contact = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
-
+  const [loading, setLoading] = useState(false);
+  const [messageSent, setMessageSent] = useState(false);
   const handleChange = (e: ChangeEvent) => {
     const {name, value} = e.target as HTMLInputElement;
     setFormFields({
@@ -20,11 +23,29 @@ const Contact = () => {
   useEffect(() => {
     console.log(formFields.subject, formFields.message);
   }, [formFields]);
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    if (!messageSent) {
+      const {subject, message} = formFields;
+      setLoading(true);
+      try {
+        const messageId = await createMessage(subject, message);
+        if (messageId) {
+          setLoading(false);
+          setMessageSent(true);
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  };
   return (
     <div className="relative mt-12">
       <form
         action=""
-        className="flex flex-col w-full mx-auto  md:w-2/3 lg:w-2/4 space-y-4"
+        className="flex flex-col w-full mx-auto  md:w-2/3 lg:w-2/4 space-y-4 relative"
+        onSubmit={handleSubmit}
       >
         <Title title="Contact" subTitle="Get in touch." />
         <div className="relative">
@@ -45,9 +66,20 @@ const Contact = () => {
           placeholder="enter your message..."
           name="message"
         ></textarea>
-        <button type="submit" className="border border-custom-purple py-2">
-          Send
+        <button
+          type="submit"
+          className="border border-custom-purple py-3 "
+          disabled={messageSent}
+        >
+          {loading && !messageSent
+            ? 'Sending'
+            : !loading && messageSent
+            ? 'Your message has been sent.'
+            : 'send'}
         </button>
+        <div className="absolute right-60 bottom-2">
+          {loading && <Loader />}
+        </div>
       </form>
     </div>
   );
